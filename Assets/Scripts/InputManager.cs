@@ -75,7 +75,30 @@ public class InputManager : MonoBehaviour
 			}
 		}
 #elif UNITY_ANDROID
-		
+		if (Input.touchCount > 0)
+		{
+			Vector2 convertPos = Input.GetTouch(0).position;
+
+			if (Input.GetTouch(0).phase == TouchPhase.Began)
+			{
+				JoyBack.position = convertPos;
+				JoyFront.position = convertPos;
+				JoyStickInit(true);
+			}
+			if (Input.GetTouch(0).phase == TouchPhase.Moved)
+			{
+				if (DistanceCheck() == true)
+					JoyFront.position = convertPos;
+				if (DistanceCheck() == false)
+					JoyFront.position = (Vector2)JoyBack.position + (convertPos - (Vector2)JoyBack.position).normalized * DisBetweenTwo;
+
+				MoveDir = (JoyFront.position - JoyBack.position).normalized;
+			}
+			if (Input.GetTouch(0).phase == TouchPhase.Ended)
+			{
+				JoyStickInit(false);
+			}
+		}
 #endif
 	}
 	private void JoyStickInit(bool isActive)

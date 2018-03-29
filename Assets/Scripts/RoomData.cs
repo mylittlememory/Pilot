@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class RoomData : MonoBehaviour {
 
-	public ITEM_TYPE ItemType;
+	public CONSUME_TYPE ConsumeType;
 	private Image itemSprite;
 	private Text itemCountText;
 	private int itemCount;
@@ -26,11 +26,12 @@ public class RoomData : MonoBehaviour {
 		++itemCount;
 		itemCountText.text = string.Format("{0}",itemCount);
 	}
-	public void NoGotItem(ITEM_TYPE type)
+	public void NoGotItem(CONSUME_TYPE type)
 	{
+		itemCountText.gameObject.SetActive(true);
 		itemSprite.sprite = UIManager.current.ItemSprites[(int)type];
 		itemSprite.enabled = true;
-		ItemType = type;
+		ConsumeType = type;
 		itemCount = 1;
 		itemCountText.text = string.Format("{0}", itemCount);
 	}

@@ -18,9 +18,9 @@ public class UIManager : MonoBehaviour {
 			Destroy(gameObject);
 	}
 	
-	public void ItemEat(int type)
+	public void ItemEat(CONSUME_TYPE type)
 	{
-		UIInven.InvenDataSet((ITEM_TYPE)type);
+		UIInven.InvenDataSet(type);
 	}
 
 }
